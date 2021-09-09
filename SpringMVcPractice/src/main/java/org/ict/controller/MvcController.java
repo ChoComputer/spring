@@ -1,5 +1,6 @@
 package org.ict.controller;
 
+import org.ict.domain.TestVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,12 +55,13 @@ public class MvcController {
 	// 폼에서 post방식으로 제출했을때에만 결과 페이지로 넘어오도록 설계
 	@RequestMapping(value="/ctof", method=RequestMethod.POST)
 	public String cToF(@RequestParam("cel") int cel, Model model) {
-		double S = (double) ((cel - 32)/1.8);
-		System.out.println("섭씨 : " +S);
-		model.addAttribute("S",S);
-		model.addAttribute("cel",cel);
-		return "ctof";
+	
+		double faren = cel * 1.8 + 32;
 		
+		model.addAttribute("faren", faren);
+		model.addAttribute("cel", cel);
+		
+		return "ctof";
 	}
 	
 	// 폼으로 연결하는 매서드도 만들겠습니다.
@@ -132,6 +134,21 @@ public class MvcController {
 		// 3. 1에서 얻어온 파라미터를 2 에 출력되도록설정
 		model.addAttribute("vt",vt);
 		
+	}
+	// 원래 파라미터 자료형이 int String 이었던 경우는
+	// 단일 자료형 이었기 때무에 get post 방식을 전달되는 데이터를 자동으로
+	// 받아서 처리할 수 있습니다.
+	// 현재 TestVO내부에는 int age , String name이 들어있고
+	// TestVO를 아래와 같이 선언하는 것만으로도 int age, String name을 선언하는 것과 같은효과를 봄
+	// 즉 ?age=000&name=000라고 적는 데이터를 받아올수 있음
+	@RequestMapping(value="/getVO")
+	public String getVO(TestVO vo,Model model) {
+		System.out.println("받아온 객체 : "+vo);
+		
+		// 1. TestVO에 맴버변수를 추가하여 객체 3개를 처리해주세요
+		// 2. voview.jsp를 생성하고, 거기에 vo내부 멤버변수값을 각각 따로따로 화면에표시
+		model.addAttribute("vo",vo);
+		return "testvo/voview";
 	}
 	
 	

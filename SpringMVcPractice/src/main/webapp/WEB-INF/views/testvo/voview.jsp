@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>섭씨 : ${faren }</h1>
-<h1>화씨 : ${cel }</h1>
+	<h1>이름 : ${vo.name}</h1>
+	<h1>나이 : ${vo.age}</h1>
+	<h1>레벨 : ${vo.level}</h1>
+
 </body>
 </html>
