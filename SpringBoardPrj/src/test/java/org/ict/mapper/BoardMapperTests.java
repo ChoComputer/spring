@@ -25,7 +25,7 @@ public class BoardMapperTests {
 	
 	// 테스트용 메서드의 이름은 testGetList입니다.
 	// 테스트 코드가 실행될 수 있도록 만들어주세요.
-//@Test
+	//@Test
 	public void testGetList() {
 		// mapper 내부의 getList 메서드를 호출하려면?
 		log.info(mapper.getList());
@@ -47,13 +47,33 @@ public class BoardMapperTests {
 		//log.info(vo);
 		mapper.insert(vo);
 	}
-	@Test
+	//@Test
 	public void testSelect() {
 		// 있는 글번호 입력시 데이터 출력   오라클에서는 자동커밋이 안됨 스프링내에서는 자동 커밋됨 갱신
 	//	mapper.select((long)4);
-		log.info(mapper.select(1L));
+		log.info(mapper.select(4L));
 		
 	
+	}
+	
+	//@Test
+	public void testDelete() {
+		
+		mapper.delete(4L);
+		
+	}
+	//@Test
+	public void testUpdate() {
+		// BoardVO를 먼저생성해 바꿀내역을 저장 한다음 파라미터에 전달
+		BoardVO vo= new BoardVO();
+		vo.setWriter("바뀐글쓴이2");
+		vo.setContent("바꾼본문2");
+		vo.setTitle("바뀐제목2");
+		vo.setBno(3L);
+		log.info(vo);
+		
+		mapper.update(vo);
+		
 	}
 	
 	
