@@ -5,6 +5,9 @@
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<style>
+	*{margin : 10px; padding : 10px;}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -22,7 +25,7 @@
 	<c:forEach var="board" items="${list }">  <!-- 보드컨트롤러에서 list로 넘긴다고 했으니까 -->
 	<tr>
 		<td>${board.bno }</td>
-		<td>${board.title }</td>
+		<td><a href="/board/get?bno=${board.bno}">${board.title }</a></td>
 		<td>${board.writer }</td>
 		<td>${board.regdate }</td>
 		<td>${board.updatedate }</td>

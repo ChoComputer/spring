@@ -34,7 +34,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO get(Long bno) {
 		BoardVO board=mapper.select(bno);
-		log.info(bno+"번글 실행");
+		log.info(bno+" 번 글 실행");
 		
 		return board;
 	}

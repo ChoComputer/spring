@@ -16,7 +16,7 @@
 		CDATA를 이용합니다. 아래와 같이 <![CDATA[실행문]]> 과 같이 실행문을 CDATA내부에 작성
 		하면 내부의 부틍호는 전부 문자로 간주됩니다. -->
 		<![CDATA[
-			SELECT * FROM board_tbl ORDER BY bno ASC
+			SELECT * FROM board_tbl ORDER BY bno DESC
 		]]>
 	</select>
 

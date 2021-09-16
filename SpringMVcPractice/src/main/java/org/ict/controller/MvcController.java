@@ -40,7 +40,7 @@ public class MvcController {
 	}
 	// goD는 requestParam을 이용해 변수명과 받는 이름이 일치하지 않게 해보겠습니다.
 	@RequestMapping(value="/goD")
-	// @@RequestParam("대체이름")은 변수 왼쪽에 선언
+	// @RequestParam("대체이름")은 변수 왼쪽에 선언
 	// 이런게되면 적힌 변수명대신 대체이름으로 치환해 받아옴
 	public String goD(@RequestParam("d") int dNum, Model model) {
 		System.out.println("d 변수명으로 받은게 dNum에 저장  : "+dNum);
