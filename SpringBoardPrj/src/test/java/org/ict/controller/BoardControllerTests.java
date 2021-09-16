@@ -88,6 +88,11 @@ public class BoardControllerTests {
 				).andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
 		
+		/*
+		 * log.info( mockMvc.perform( MockMvcRequestBuilders.get("/board/get?bno=2"))
+		 * .andReturn() .getModelAndView() .getModelMap());
+		 *  이렇게도 써도 됨 
+		 */
 	}
 	
 
