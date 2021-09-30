@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.rg/dtd/mybatis-3-mapper.dtd">
+<!-- 위의 스키마 작성 후, 어떤 인터페이스의 메서드를 쿼리문과
+연결해 줄지 아래와 같이 인터페이스 파일부터 mapper태그로 연결합니다. -->
+<mapper namespace="org.ict.mapper.ReplyMapper">
+	<select id="getList" resultType="org.ict.domain.ReplyVO">
+		SELECT * FROM reply_tbl
+			WHERE bno=#{bno}
+			OREDER BY rno DESC
+	</select>
+	
+	<insert id="create">
+		INSERT INTO reply_tbl(rno,bno,reply,replyer) VALUES (reply_num.nextval,#{bno},#{reply},#{replyer})
+	</insert>
+	
+	<update id="update">
+	<!-- 리플의경우 제목이 없고 본문만 있기 때문에 이렇게 처리 -->
+		UPDATE reply_tbl
+		 	SET
+		 	reply=#{reply},updatedate=now() 
+		 	WHERE rno=#{rno}
+	</update>
+	
+	<delete id="delet">
+		DELETE FROM reply_tbl
+		WHERE rno=#{rno}
+	</delete>
+
+</mapper>

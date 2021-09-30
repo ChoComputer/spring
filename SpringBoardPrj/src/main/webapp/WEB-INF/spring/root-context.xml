@@ -28,9 +28,10 @@
 	
 	<mybatis-spring:scan base-package="org.ict.mapper"/>
 	
-	<!-- 컨포넌트 스캔을 위해 하단 namespaces의 context탭활성후 태그를 추가하기 -->
-	
-	<context:component-scan base-package="org.ict.service"/>
+	<!-- 컴포넌트 스캔을 위해 하단 namespaces의
+	 context 탭 활성화 후 태그를 추가해줍니다. --> 
+	<context:component-scan 
+		base-package="org.ict.service" />
 	
 	
 </beans>

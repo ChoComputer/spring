@@ -30,10 +30,12 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<!-- 한글 인코딩 설정 만약 이거 잘못된상태로  db에 들어가면 답없음 db꺼 꺼내와서 지우고 다시 넣어야함-->
+	<!-- 한글 인코딩 설정 -->
 	<filter> 
 	    <filter-name>encodingFilter</filter-name> 
-	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+	    <filter-class>
+	    	org.springframework.web.filter.CharacterEncodingFilter
+	    </filter-class> 
 	    <init-param> 
 	       <param-name>encoding</param-name> 
 	       <param-value>UTF-8</param-value> 

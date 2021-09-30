@@ -1,6 +1,7 @@
 package org.ict.mapper;
 
 import org.ict.domain.BoardVO;
+import org.ict.domain.Criteria;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,53 +29,67 @@ public class BoardMapperTests {
 	//@Test
 	public void testGetList() {
 		// mapper 내부의 getList 메서드를 호출하려면?
-		log.info(mapper.getList());
+		log.info(mapper.getList(""));
 	}
 	
+	// insert를 실행할 테스트코드를 하단에 작성해보겠습니다.
 	//@Test
 	public void testInsert() {
 		// 글 입력을 위해서 BoardVO 타입을 매개로 사용함
-		// 따라서 BoardVO를 만들어 놓고
-		//setter로 글제목, 글본문, 글쓴이 만 저장해둔 채로
-		// mapper.insert(vo);를 호출해서 실행여부를 확인하면 됨
-		// 위 설명을 토대로 아래vo에 6번글에 대한 제목 본문 글쓴이를 넣고
-		// 호출해주신다음 실제로 DB에 글이 들어갔는지 확인하기
+		// 따라서 BoardVO를 만들어놓고
+		// setter로 글제목, 글본문, 글쓴이 만 저장해둔 채로
+		// mapper.insert(vo);를 호출해서 실행여부를 확인하면 됨.
+		// 위 설명을 토대로 아래 vo에 6번글에 대한 제목 본문 글쓴이를 넣고
+		// 호출해주신 다음 실제로 DB에 글이 들어갔는지 확인해주세요.
 		BoardVO vo = new BoardVO();
-		vo.setTitle("새로넣은제목");
-		vo.setContent("새로넣은컨텐츠");
-		vo.setWriter("새로넣은글쓴이");
+		
+		// 입력할 글에 대한 제목, 글쓴이, 본문을 vo에 넣어줍니다.
+		vo.setTitle("새로넣는글");
+		vo.setContent("새로넣는본문");
+		vo.setWriter("새로넣는글쓴이");
 		
 		//log.info(vo);
 		mapper.insert(vo);
 	}
+	
+	
 	//@Test
 	public void testSelect() {
-		// 있는 글번호 입력시 데이터 출력   오라클에서는 자동커밋이 안됨 스프링내에서는 자동 커밋됨 갱신
-	//	mapper.select((long)4);
-		log.info(mapper.select(4L));
-		
-	
+		// 있는 글번호 입력시 데이터 출력
+		mapper.select(6L);
 	}
 	
 	//@Test
 	public void testDelete() {
-		
-		mapper.delete(4L);
+		// mapper.delete() 호출시 삭제
+		mapper.delete(3L);
 		
 	}
+	
 	//@Test
 	public void testUpdate() {
-		// BoardVO를 먼저생성해 바꿀내역을 저장 한다음 파라미터에 전달
-		BoardVO vo= new BoardVO();
-		vo.setWriter("바뀐글쓴이2");
-		vo.setContent("바꾼본문2");
-		vo.setTitle("바뀐제목2");
-		vo.setBno(3L);
-		log.info(vo);
+		// BoardVO를 먼저 생성해서 바꿀 내역을 저장한 다음
+		// 파라미터에 전달
+		BoardVO vo = new BoardVO();
+		
+		vo.setTitle("바꾼제목");
+		vo.setContent("바꾼본문");
+		vo.setWriter("바꾼글쓴이");
+		vo.setBno(4L);
 		
 		mapper.update(vo);
+	}
+	
+	//@Test
+	public void testgetPaging() {
+		//페이징 코드를 이용해서 원하는 번호의 페이지가 잘 출력되는지 확인해주세요
+		Criteria cri = new Criteria(5,10);
+		// getListPaging 을 호출할때 Criteria가 필요하므로 위에 선언
+		//log.info(mapper.getListPaging(cri));
 		
 	}
+	
+	
 	
 	
 }

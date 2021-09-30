@@ -1,33 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-<style>
-	*{margin : 10px; padding : 10px;}
-</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<%-- 맨처음 ${board } 써넣고 ?bno=숫자 쳐서 board로 받아온게 나오나 확인한후 밑을 작성 --%>
-<div class="container">
-			글번호 : ${board.bno }<br/>
-		<div class="row">
-			글제목 : <input type="text" value=${board.title } readonly/><br/>
-		</div>
-		<div class="row">
-			글본문 : <textarea rows="5" cols="10" readonly>${board.content }</textarea><br/>
-		</div>
-		<div class="row">
-			글쓴이 : <input type="text" value=${board.writer }  readonly/><br/>
-		</div>
-		쓴날짜 : ${board.regdate }/ 최종 수정 날짜 : ${board.updatedate }<br/>
-		<a href="/board/list">목록으로</a>
-		</div>
+	<h1>상세페이지</h1>
+	글번호 : ${vo.bno}<br/>
+	글제목 : ${vo.title}<br/>
+	글본문 : ${vo.content}<br/>
+	글쓴이 : ${vo.writer}<br/>
+	쓴날짜 : ${vo.regdate} / 최종수정날짜 : ${vo.updatedate}<br/>
+	<button><a href="/board/list?page=${cri.page }&searchType=${cri.searchType}&keyword=${cri.keyword}">목록으로</a></button><br>
 	
-
+	<%--  pageNum(page로받앗음list에서),searchType,keyword 들어오는지 여부 디버깅 
+		EL의 ${param.파라미터명}을 이용하여 확인 가능 위의 세파라미터는 list에서 오는거임--%>
+		글번호 : ${param.page}<br>
+		검색조건 : ${param.searchType }<br>
+		키워드 : ${param.keyword }<br>
+	
+	<!-- 글 삭제용 버튼 
+	글 삭제가 되면, 리스트페이지로 넘어가는데, 삭제로 넘어오는 경우는
+	alert()창을 띄워서 "글이 삭제되었습니다" 가 출력되도록 로직을 짜주세요.-->
+	<form action="/board/remove" method="post">
+		<input name="bno" type="hidden" value="${vo.bno}" >
+		<input type="submit" value="삭제">
+	</form>
+	<!-- 수정페이지로 넘어가는 버튼을 추가해주세요. -->
+	<form action="/board/boardmodify" method="post">
+			수정날짜 : <input name="updateDate" type="text" class="form-control"
+			readonly=true value=${board.updateDate}><br> 
+			<input type="hidden" name="bno" value="${vo.bno }" /> 
+			<input type="hidden" name="page" value="${param.page}"> 
+			<input type="hidden" name="searchType" value="${param.searchType}"> 
+			<input type="hidden" name="keyword" value="${param.keyword}"> 
+		<input type="submit" value="수정">
+	</form>
+	
+	
 </body>
 </html>
