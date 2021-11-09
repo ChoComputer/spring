@@ -62,6 +62,11 @@ public class HomeController {
 		System.out.println("세션동작확인:" + session.getAttribute("sTest"));
 		return "session2";
 	}
+	@GetMapping("/test")
+	public void ajaxTest() {
+		
+		
+	}
 	
 	
 	

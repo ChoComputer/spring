@@ -27,9 +27,10 @@
 		<c:forEach var="board" items="${list }">
 			<tr>
 				<td>${board.bno }</td>
-				<td><a
+				<td><button type="button" class="btn btn-success"><a
 					href="/board/get?bno=${board.bno}&page=${btnMaker.cri.pageNum }&searchType=${btnMaker.cri.searchType}&keyword=${btnMaker.cri.keyword}">
-						${board.title }</a></td>
+						${board.title } <span class="badge bg-secondary">${board.replyCount }</a></span>
+</button></td>
 				<td>${board.writer }</td>
 				<td>${board.regdate }</td>
 				<td>${board.updatedate }</td>

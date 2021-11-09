@@ -8,7 +8,7 @@
 	<select id="getList" resultType="org.ict.domain.ReplyVO">
 		SELECT * FROM reply_tbl
 			WHERE bno=#{bno}
-			OREDER BY rno DESC
+			ORDER BY rno DESC
 	</select>
 	
 	<insert id="create">
@@ -18,14 +18,19 @@
 	<update id="update">
 	<!-- 리플의경우 제목이 없고 본문만 있기 때문에 이렇게 처리 -->
 		UPDATE reply_tbl
-		 	SET
-		 	reply=#{reply},updatedate=now() 
-		 	WHERE rno=#{rno}
+		 	SET 
+		 	reply = #{reply} , updatedate=sysdate 
+		 	WHERE rno = #{rno}
 	</update>
 	
-	<delete id="delet">
+	<delete id="delete">
 		DELETE FROM reply_tbl
 		WHERE rno=#{rno}
 	</delete>
+	
+	<select id="getBno" resultType="long"> <!-- type이 long이니까 replyMepper도 long임 첫글자는 소문자임! -->
+		SELECT bno FROM reply_tbl         
+			WHERE rno=#{rno}
+	</select>
 
 </mapper>

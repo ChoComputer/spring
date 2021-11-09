@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.rg/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ict.mapper.BoardAttachMapper">
+
+<insert id="insert">
+	INSERT INTO ictimage (uuid, uploadpath, filename, image,bno)
+			VALUES (#{uuid}, #{uploadPath}, #{fileName},#{image},#{bno})
+</insert>
+<!-- 콘솔창 보시면 BoardAttachMapper에다가 delete대신 delet로 적어서 에러났다고 나와있습니다. -->
+<delete id="delete">
+	DELETE FORM ictimage WHERE uuid =#{uuid}
+</delete>
+
+<select id="findByBno" resultType="org.ict.domain.BoardAttachVO">
+	SELECT * FROM ictimage WHERE bno=#{bno}
+</select>
+
+</mapper>

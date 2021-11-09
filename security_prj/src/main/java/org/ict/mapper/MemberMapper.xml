@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ict.mapper.MemberMapper">
+	<resultMap type="org.ict.domain.MemberVO"
+		id="memberMap">
+		<!--  join 구문 실행시 매치기준 컬럼을 id태그에 먼저 설정함 -->
+		<id property="userid" column="userid" />
+		<result property="userid" column="userid" />
+		<result property="userpw" column="userpw" />
+		<result property="userName" column="username" />
+		<result property="regDate" column="regdate" />
+		<result property="updateDate" column="updatedate" />
+		<!-- 클래스 내부에 List<자료형>을 멤버변수로 가지면 아래와 같이 collection태그로 설정 -->
+		<collection property="authList" resultMap="authMap">
+		</collection>
+	</resultMap>
+	
+	<!-- collection 내부의 resultMap에 들어간 authMap설정 -->
+	<resultMap type="org.ict.domain.AuthVO" id="authMap">
+		<result property="userid" column="userid" />
+		<result property="auth" column="auth" />
+	</resultMap>
+
+	<select id="read" resultMap="memberMap">
+		SELECT
+			m.userid, userpw, username, enabled, regdate, updatedate, a.auth
+				FROM
+			member_tbl m LEFT OUTER JOIN member_auth a on m.userid = a.userid
+			WHERE m.userid=#{userid}
+	</select>
+
+</mapper>
