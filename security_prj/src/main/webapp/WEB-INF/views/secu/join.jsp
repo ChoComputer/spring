@@ -8,17 +8,16 @@
 </head>
 <body>
 	<h1>회원가입창</h1>
-	
 	<form action="/secu/join" method="post">
 		아이디 : <input type="text" name="userid"><br/>
-		비번 : <input type="text" name="userpw"><br/>
+		비밀번호 : <input type="text" name="userpw"><br/>
 		이름 : <input type="text" name="userName"><br/>
-		<input type="checkbox" name="role" value="ROLE_ADMIN">어디민 권한 &nbsp;&nbsp;&nbsp;
-		<input type="checkbox" name="role" value="ROLE_MEMBER">정회원 권한 &nbsp;&nbsp;&nbsp;
-		<input type="checkbox" name="role" value="ROLE_USER">준회원 권한 
-		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
-		<input type="submit" value="가입하기"> 
+		<input type="checkbox" name="role" value="ROLE_ADMIN">어드민 권한&nbsp;&nbsp;&nbsp;
+		<input type="checkbox" name="role" value="ROLE_MEMBER">정회원 권한&nbsp;&nbsp;&nbsp;
+		<input type="checkbox" name="role" value="ROLE_USER">준회원 권한<br>
+		<input type="hidden" name="${_csrf.parameterName}" 
+								value="${_csrf.token }" />
+		<input type="submit" value="가입하기">
 	</form>
-
 </body>
 </html>

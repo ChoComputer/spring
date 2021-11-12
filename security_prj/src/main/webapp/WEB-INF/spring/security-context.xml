@@ -3,59 +3,45 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security 
-	http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="customAccessDenied" class="org.ict.security.CustomAccessDeniedHandler"/>
-	<bean id="customLoginSuccess" class="org.ict.security.CustomLoginSuccessHandler"/>
-	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-	<bean id="customUserDetailsService" class="org.ict.security.CustomUserDetailsService"/>
+	<!-- 커스텀 클래스 빈 저장 -->
+	<bean id="customAccessDenied" class="org.ict.security.CustomAccessDeniedHandler" />
+	<bean id="customLoginSuccess" class="org.ict.security.CustomLoginSuccessHander" />
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<bean id="customUserDetailsService" class="org.ict.security.CustomUserDetailsService" />
+
+
+	<!-- http영역 -->
 	<security:http>
-		<!-- /secu/all접속시 모든유저에게 접근허용 -->
-		<security:intercept-url pattern="/secu/all"
-			access="permitAll" />
-
-		<!-- /secu/member는 member에게만 접근 허용 -->
-		<!-- <security:intercept-url pattern="/secu/member"
-			access="hasRole('ROLE_MEMBER')" /> -->
-			
-		<!-- /secu/admin는 admin에게만 접근 허용 -->
-		<!-- <security:intercept-url pattern="/secu/admin"
-			access="hasRole('ROLE_ADMIN')" /> -->
-
-		<security:form-login login-page="/customLogin"
-		authentication-success-handler-ref="customLoginSuccess"/>
+	
+		<security:form-login login-page="/customLogin" 
+			authentication-success-handler-ref="customLoginSuccess" />
 		
-		
-		<!-- 접근제한걸릴시 처리할 핸들러 -->
-<!-- 		<security:access-denied-handler error-page="/accessError"/> -->
-			<security:access-denied-handler ref="customAccessDenied"/>
-
-			<security:logout logout-url="/customLogout" invalidate-session="true"
-				delete-cookies="remember-me,JSESSIONID"/>		
-			<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/><!-- 604800초는 일주일 -->
-		
+		<!-- <security:access-denied-handler error-page="/accessError"/> -->
+		<security:access-denied-handler ref="customAccessDenied"/>
+	
+		<security:logout logout-url="/customLogout" invalidate-session="true"
+			delete-cookies="remember-me,JSESSIONID"/>
+	
+		<security:remember-me data-source-ref="dataSource" 
+								token-validity-seconds="604800"/>
+	
 	</security:http>
-
+	
 	<!-- 인증영역 -->
-
 	<security:authentication-manager>
-
-			<!-- 커스텀설정 -->
-		<security:authentication-provider user-service-ref="customUserDetailsService">
-			<!--   <security:user-service>
+	
+		<security:authentication-provider
+			user-service-ref="customUserDetailsService">
 			
-				<security:user name="member" password="{noop}member"
-					authorities="ROLE_MEMBER" />
-				<security:user name="admin" password="{noop}admin"
-					authorities="ROLE_MEMBER,ROLE_ADMIN" />
-			</security:user-service> -->
-			<!-- db연동 데이타소스가 web.xml에 설정해논거임 디폴트설정임-->
-			<!--  <security:jdbc-user-service data-source-ref="dataSource"/>-->
+			
 			<security:password-encoder ref="bcryptPasswordEncoder"/>
+			
 		</security:authentication-provider>
-
+	
 	</security:authentication-manager>
-
+	
 </beans>

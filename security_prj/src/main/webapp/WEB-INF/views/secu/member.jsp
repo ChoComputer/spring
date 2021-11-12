@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>member address</h1>
-<a href="/customLogout">로그아웃페이지로 이동</a>
+	<h1>member주소</h1>
 </body>
 </html>
